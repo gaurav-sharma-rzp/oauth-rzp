@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>OAuth Testing</title>
+</head>
+<body>
+
+<h1>OAuth Testing</h1>
+<p>Testing OAtuh to Razorpay Comunication</p>
+<button id = "codeB">Get Auth Code</button>
+<button id = "tokenB">Get Tokens</button>
+<button id = "paymentsB">Get Payments</button>
+<br>
+<textarea id="txtArea" name="area" rows="20" cols="100">
+
+</textarea>
+<script type="text/javascript">
+    document.getElementById("codeB").onclick = function () {
+        location.href = "https://auth.razorpay.com/authorize?client_id=FN2tdt8BCDmrwr&response_type=code&redirect_uri=http://localhost:3000/callback&scope=read_only&state=current_state";
+    };
+
+    document.getElementById("tokenB").onclick = function () {
+        var apiUrl = 'http://localhost:3000/token';
+        fetch(apiUrl).then(response => {
+            return response.json();
+        }).then(data => {
+            // Work with JSON data here
+            console.log(data);
+            document.getElementById("txtArea").value = JSON.stringify(data);
+        }).catch(err => {
+            // Do something for an error here
+            console.log(err);
+        });
+    };
+
+    document.getElementById("paymentsB").onclick = function () {
+        var apiUrl = 'http://localhost:3000/payments';
+        fetch(apiUrl).then(response => {
+            return response.json();
+        }).then(data => {
+            // Work with JSON data here
+            console.log(data);
+            document.getElementById("txtArea").value = JSON.stringify(data);
+        }).catch(err => {
+            // Do something for an error here
+            console.log(err);
+        });
+    };
+
+
+
+</script>
+
+</body>
+</html>
